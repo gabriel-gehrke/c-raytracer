@@ -1,10 +1,10 @@
-CC = gcc -g -O3 -W -Wall -std=c99 -lm -mfpu=neon
+CC = gcc -O3 -W -Wall -std=c99 -lm
 
 %.o: %.c
 	$(CC) -c $<
 
 main: float3.o color.o primitive.o ray.o sphere.o camera.o main.o
-	$(CC) $^ -o $@ -std=c99 -lm
+	$(CC) $^ -o $@
 
 clean:
 	rm -f main *.o
