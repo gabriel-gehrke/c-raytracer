@@ -1,0 +1,8 @@
+# ppm image files
+*.ppm
+
+# c compilation files
+*.o
+*.s
+*.S
+*.asm
