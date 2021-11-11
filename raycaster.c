@@ -34,7 +34,7 @@ color raycaster_cast_ray(const ray* ray, const primitive* scene, size_t scene_si
         // create reflected ray
         struct _ray ray_reflected = 
         {
-            .origin = closest_hit.point,
+            .origin = vmac(closest_hit.point, ray->direction, EPSILON),
             .direction = vreflect(ray->direction, closest_hit.normal)
         };
         color c_reflect = raycaster_cast_ray(&ray_reflected, scene, scene_size, reflections - 1);
