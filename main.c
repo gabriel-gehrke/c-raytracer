@@ -6,14 +6,8 @@
 #include "sphere.h"
 #include "camera.h"
 
-/*
-static void printvec(float3 v) {
-    printf("(%f,%f,%f): [%f]\n", (double)v.x, (double)v.y, (double)v.z, (double)len(v));
-}
-*/
-
+// random float between -1 and 1
 static float randf() {
-    // random number between -1 and 1
     return 2.0f * (((float)rand())/((float)(RAND_MAX)) - 0.5f);
 }
 
@@ -27,7 +21,6 @@ int main() {
         .upward = VEC_UP
     };
     camera_set_fov(&cam, 60);
-
 
     // scene building
     const int scene_size = 200;

@@ -1,10 +1,12 @@
 #include <math.h>
+#include <stdlib.h>
 #include "camera.h"
-#include "stdlib.h"
+#include "raycaster.h"
 
-#define AMBIENT_LIGHT 0.1f
 
-static color raycast_scene(const camera* cam, float frustX, float frustY, const primitive* scene, size_t scene_size) {
+
+
+static color raycast_scene(const camera* cam, float frustX, float frustY, const primitive* scene, size_t scene_size, int reflections) {
 
     ray ray =
     {
@@ -12,29 +14,7 @@ static color raycast_scene(const camera* cam, float frustX, float frustY, const 
         .direction = vmac(vmac(vmul(cam->forward, cam->focus), cam->upward, frustY), cam->right, frustX)
     };
 
-    float min_dist = INFINITY;
-    primitive* closest = NULL;
-    ray_hit hit;
-    ray_hit closest_hit;
-    
-    for (size_t i = 0; i < scene_size; i++) {
-        primitive* prim = &scene[i];
-
-        if (primitive_get_intersection(prim, &ray, &hit)) {
-            min_dist = fminf(min_dist, hit.distance);
-            closest = prim;
-            closest_hit = *(&hit);
-        }
-    }
-
-    if (closest) {
-        // very basic shading
-        const float3 lightDir = VEC_DOWN;
-        float cosTheta = fmaxf(AMBIENT_LIGHT, fminf(1, -dot(closest_hit.normal, lightDir)));
-
-        return color_mul(&closest->color, cosTheta);
-    }
-    return COLOR_BLACK;
+    return raycaster_cast_ray(&ray, scene, scene_size, reflections);
 }
 
 void camera_set_fov(camera* cam, float fov) {
@@ -62,7 +42,8 @@ void camera_render(const camera* cam, color* pixels, int width, int height, cons
             float frustX = ((x - hwidth) / hwidth) * width_scale;
             float frustY = ((hheight - y) / hheight) * height_scale; 
 
-            pixels[row_offs + x] = raycast_scene(cam, frustX, frustY, scene, scene_size);
+            // cast ray with 3 bounces
+            pixels[row_offs + x] = raycast_scene(cam, frustX, frustY, scene, scene_size, 3);
         }
     }
 }
