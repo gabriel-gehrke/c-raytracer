@@ -76,7 +76,7 @@ static inline float3 normalized(float3 a) {
 
 static inline float3 vreflect(float3 v, float3 n) {
     // r = v - 2*<n,v>*n
-    return vsub(v, vmul(n, 2 * dot(n, v)));
+    return normalized(vsub(v, vmul(n, 2 * dot(n, v))));
 }
 
 #endif

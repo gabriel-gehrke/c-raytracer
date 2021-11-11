@@ -32,8 +32,16 @@ bool ray_sphere_intersection(const ray* ray, void* data, ray_hit* hit_out) {
     float t0 = q / A;
     float t1 = C / q;
 
-    float t = fabsf(t0) < fabsf(t1) ? t0 : t1;
-    if (t < EPSILON) return false;
+    float t;
+    if (t0 > 0 && t1 > 0) {
+        t = fmin(t0, t1);
+    } else if (t0 < 0 && t1 > 0) {
+        t = t1;
+    } else if (t0 > 0 && t1 < 0) {
+        t = t0;
+    } else {
+        return false;
+    }
 
     const float3 hit = vmac(ray->origin, ray->direction, t);
 

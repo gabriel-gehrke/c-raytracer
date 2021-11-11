@@ -6,7 +6,7 @@
 
 
 
-static color raycast_scene(const camera* cam, float frustX, float frustY, const primitive* scene, size_t scene_size, int reflections) {
+static color raycast_scene(const camera* cam, float frustX, float frustY, const primitive* scene, size_t scene_size) {
 
     ray ray =
     {
@@ -14,7 +14,8 @@ static color raycast_scene(const camera* cam, float frustX, float frustY, const 
         .direction = vmac(vmac(vmul(cam->forward, cam->focus), cam->upward, frustY), cam->right, frustX)
     };
 
-    return raycaster_cast_ray(&ray, scene, scene_size, reflections);
+    // cast ray with 5 bounces
+    return raycaster_cast_ray(&ray, scene, scene_size, 5);
 }
 
 void camera_set_fov(camera* cam, float fov) {
@@ -42,8 +43,7 @@ void camera_render(const camera* cam, color* pixels, int width, int height, cons
             float frustX = ((x - hwidth) / hwidth) * width_scale;
             float frustY = ((hheight - y) / hheight) * height_scale; 
 
-            // cast ray with 3 bounces
-            pixels[row_offs + x] = raycast_scene(cam, frustX, frustY, scene, scene_size, 3);
+            pixels[row_offs + x] = raycast_scene(cam, frustX, frustY, scene, scene_size);
         }
     }
 }
