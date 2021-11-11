@@ -1,6 +1,7 @@
 #include "raycaster.h"
 
-#define AMBIENT_LIGHT 0.1f
+#define AMBIENT_LIGHT 0.5f
+#define SKY_COLOR COLOR_WHITE
 
 color raycaster_cast_ray(const ray* ray, const primitive* scene, size_t scene_size, int reflections) {
     float min_dist = INFINITY;
@@ -19,7 +20,7 @@ color raycaster_cast_ray(const ray* ray, const primitive* scene, size_t scene_si
     }
 
     // handle rays without any intersection
-    if (!closest) return COLOR_BLACK;
+    if (!closest) return SKY_COLOR;
 
     color c_surface = closest->color;
 
@@ -34,7 +35,7 @@ color raycaster_cast_ray(const ray* ray, const primitive* scene, size_t scene_si
         // create reflected ray
         struct _ray ray_reflected = 
         {
-            .origin = vmac(closest_hit.point, ray->direction, EPSILON),
+            .origin = vmac(closest_hit.point, ray->direction, 1e-3f),
             .direction = vreflect(ray->direction, closest_hit.normal)
         };
         color c_reflect = raycaster_cast_ray(&ray_reflected, scene, scene_size, reflections - 1);
