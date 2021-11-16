@@ -10,7 +10,7 @@ SRC_DIR := src
 C_FILES := $(wildcard $(SRC_DIR)/*.c)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(@D)
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@ -Iinclude
 
 OBJ_FILES = $(C_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)

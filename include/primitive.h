@@ -16,7 +16,7 @@ struct _ray_hit {
 };
 typedef struct _ray_hit ray_hit;
 
-typedef bool (*intersection_function)(const struct _ray*, void*, struct _ray_hit*);
+typedef bool (*intersection_function)(const ray*, void*, ray_hit*);
 
 struct _primitive {
     intersection_function intersector;
@@ -26,6 +26,6 @@ struct _primitive {
 typedef struct _primitive primitive;
 
 
-bool primitive_get_intersection(const primitive* p, const struct _ray* r, ray_hit* hit_out);
+bool primitive_get_intersection(const primitive* p, const ray* r, ray_hit* hit_out);
 
 #endif

@@ -4,16 +4,15 @@
 #define SKY_COLOR COLOR_WHITE
 
 color raycaster_cast_ray(const ray* ray, const primitive* scene, const size_t scene_size, const int reflections) {
-    float min_dist = INFINITY;
     ray_hit closest_hit = {
-        .object = NULL
+        .object = NULL,
+        .distance = INFINITY
     };
     
     for (size_t i = 0; i < scene_size; i++) {
         ray_hit hit;
 
-        if (primitive_get_intersection(scene + i, ray, &hit)) {
-            min_dist = fminf(min_dist, hit.distance);
+        if (primitive_get_intersection(scene + i, ray, &hit) && hit.distance < closest_hit.distance) {
             closest_hit = hit;
         }
     }
