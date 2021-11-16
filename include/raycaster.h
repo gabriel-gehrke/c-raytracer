@@ -6,6 +6,6 @@
 #include "color.h"
 #include "primitive.h"
 
-color raycaster_cast_ray(const ray* ray, const primitive* scene, size_t scene_size, int reflections);
+color raycaster_cast_ray(const ray* ray, const primitive* scene, const size_t scene_size, const int reflections);
 
 #endif

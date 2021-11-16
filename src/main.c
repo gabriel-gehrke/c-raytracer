@@ -6,8 +6,8 @@
 #include "sphere.h"
 #include "camera.h"
 
-#define WIDTH 1280
-#define HEIGHT 720
+#define WIDTH 512
+#define HEIGHT 512
 #define TOTAL_PIXELS (WIDTH * HEIGHT)
 color pixels[TOTAL_PIXELS];
 

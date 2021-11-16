@@ -5,9 +5,6 @@
 #include "raycaster.h"
 #include "util.h"
 
-
-
-
 static color raycast_scene(const camera* cam, float frustX, float frustY, const primitive* scene, size_t scene_size) {
 
     ray ray =
