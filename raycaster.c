@@ -3,23 +3,23 @@
 #define AMBIENT_LIGHT 0.5f
 #define SKY_COLOR COLOR_WHITE
 
-color raycaster_cast_ray(const ray* ray, const primitive* scene, size_t scene_size, int reflections) {
+color raycaster_cast_ray(const ray* ray, const primitive* scene, const size_t scene_size, const int reflections) {
     float min_dist = INFINITY;
-    primitive* closest = NULL;
-    ray_hit hit;
-    ray_hit closest_hit;
+    ray_hit closest_hit = {
+        .object = NULL
+    };
     
     for (size_t i = 0; i < scene_size; i++) {
-        primitive* prim = &scene[i];
+        ray_hit hit;
 
-        if (primitive_get_intersection(prim, ray, &hit)) {
+        if (primitive_get_intersection(scene + i, ray, &hit)) {
             min_dist = fminf(min_dist, hit.distance);
-            closest = prim;
-            closest_hit = *(&hit);
+            closest_hit = hit;
         }
     }
 
     // handle rays without any intersection
+    primitive* closest = closest_hit.object;
     if (!closest) return SKY_COLOR;
 
     color c_surface = closest->color;

@@ -11,6 +11,7 @@ typedef struct _ray ray;
 struct _ray_hit {
     float3 point;
     float3 normal;
+    struct _primitive* object;
     float distance;
 };
 typedef struct _ray_hit ray_hit;

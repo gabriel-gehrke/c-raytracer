@@ -12,6 +12,7 @@ struct _camera {
     float3 upward;
     float3 right;
     float focus;
+    float fov;
 };
 typedef struct _camera camera;
 

@@ -6,6 +6,11 @@
 #include "sphere.h"
 #include "camera.h"
 
+#define WIDTH 1280
+#define HEIGHT 720
+#define TOTAL_PIXELS (WIDTH * HEIGHT)
+color pixels[TOTAL_PIXELS];
+
 // random float between -1 and 1
 static float randf() {
     return 2.0f * (((float)rand())/((float)(RAND_MAX)) - 0.5f);
@@ -37,17 +42,11 @@ int main() {
         scene[i].color = color_rand();
     }
 
-
-    // frame rendering
-    const int width = 1920;
-    const int height = 1080;
-    color pixels[width * height];
-
-    camera_render(&cam, pixels, width, height, scene, scene_size);
+    camera_render(&cam, pixels, WIDTH, HEIGHT, scene, scene_size);
 
     FILE *fp = fopen("./first.ppm", "wb"); /* b - binary mode */
-    fprintf(fp, "P6\n%d %d\n255\n", width, height);
-    fwrite(pixels, width * height, sizeof(color), fp);
+    fprintf(fp, "P6\n%d %d\n255\n", WIDTH, HEIGHT);
+    fwrite(pixels, TOTAL_PIXELS, sizeof(color), fp);
     fclose(fp);
 
     return EXIT_SUCCESS;

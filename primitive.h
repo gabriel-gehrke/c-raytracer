@@ -9,12 +9,12 @@
 #include "ray.h"
 
 
-typedef bool (*intersection_function)(const ray*, void*, ray_hit*);
+typedef bool (*intersection_function)(const ray*, void*, struct _ray_hit*);
 
 struct _primitive {
     intersection_function intersector;
-    color color;
     void* data;
+    color color;
 };
 typedef struct _primitive primitive;
 
