@@ -23,9 +23,9 @@ static inline color color_rand() {
 static inline color color_mul(const color c, const float factor) {
     color new_c = 
     {
-        .r = (int) (c.r * factor),
-        .g = (int) (c.g * factor),
-        .b = (int) (c.b * factor)
+        .r = (uint8_t) (c.r * factor),
+        .g = (uint8_t) (c.g * factor),
+        .b = (uint8_t) (c.b * factor)
     };
 
     return new_c;
@@ -35,9 +35,9 @@ static inline color color_mul(const color c, const float factor) {
 static inline color color_avg(const color a, const color b) {
     color c =
     {
-        .r = (uint8_t) (((int)a.r + (int)b.r) / 2),
-        .g = (uint8_t) (((int)a.g + (int)b.g) / 2),
-        .b = (uint8_t) (((int)a.b + (int)b.b) / 2)
+        .r = (uint8_t) (((uint32_t)a.r + (uint32_t)b.r) / 2),
+        .g = (uint8_t) (((uint32_t)a.g + (uint32_t)b.g) / 2),
+        .b = (uint8_t) (((uint32_t)a.b + (uint32_t)b.b) / 2)
     };
     return c;
 }

@@ -12,9 +12,10 @@ static color raycast_scene(const camera* cam, float frustX, float frustY, const 
         .origin = cam->position,
         .direction = vmac(vmac(vmul(cam->forward, cam->focus), cam->upward, frustY), cam->right, frustX)
     };
+    ray.direction = normalized(ray.direction);
 
     // cast ray with 5 bounces
-    return raycaster_cast_ray(&ray, scene, scene_size, 2);
+    return raycaster_cast_ray(&ray, scene, scene_size, 5);
 }
 
 static void print_percent(float percent) {
@@ -30,15 +31,15 @@ void camera_set_fov(camera* cam, float fov) {
 
 void camera_render(const camera* cam, color* pixels, int width, int height, const primitive* scene, size_t scene_size) {
 
-    // Calculate the aspect ration
+    // Calculate the aspect ratio
     float fwidth = width;
     float fheight = height;
 
     float hwidth = fwidth / 2.0f;
     float hheight = fheight / 2.0f;
 
-    float width_scale = width < height ? fwidth / fheight : 1.0;
-    float height_scale = height < width? fheight / fwidth : 1.0;
+    float width_scale = width < height ? fwidth / fheight : 1.0f;
+    float height_scale = height < width? fheight / fwidth : 1.0f;
 
     // Create the image by casting one ray into the scene for each pixel
     for (int y = 0; y < height; y++) {

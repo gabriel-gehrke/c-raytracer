@@ -21,6 +21,6 @@ main: $(OBJ_FILES)
 	$(CC) $(CFLAGS) -o $@ $^ -lm -Iinclude
 
 clean:
-	rm -rf main build
+	rm -rf main build *.ppm
 
 all: main

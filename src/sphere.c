@@ -11,11 +11,11 @@ primitive sphere_get_primitive(sphere* s) {
 }
 
 bool ray_sphere_intersection(const ray* ray, void* data, ray_hit* hit_out) {
-    sphere* this = (sphere*) data;
+    sphere* ball = (sphere*) data;
 
     float3 d = ray->direction;
-    float3 o = vsub(ray->origin, this->center);
-    float r = this->radius;
+    float3 o = vsub(ray->origin, ball->center);
+    float r = ball->radius;
 
     float A = dot(d, d);
     float B = 2.0f * dot(d, o);
@@ -47,6 +47,6 @@ bool ray_sphere_intersection(const ray* ray, void* data, ray_hit* hit_out) {
 
     hit_out->distance = t;
     hit_out->point = hit;
-    hit_out->normal = normalized(vsub(hit, this->center));
+    hit_out->normal = normalized(vsub(hit, ball->center));
     return true;
 }

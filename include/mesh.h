@@ -4,7 +4,10 @@
 #include "triangle.h"
 
 struct _mesh {
+    // the array of triangles making up this mesh
     triangle* tris;
+
+    // the length of the triangles array
     size_t tris_len;
 };
 typedef struct _mesh mesh;

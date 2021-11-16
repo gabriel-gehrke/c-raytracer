@@ -55,7 +55,7 @@ static inline float vdist(float3 a, float3 b) {
     return len(vsub(a, b));
 }
 
-// calculates the squared distance of two given points in 3d space
+// calculates the squared distance between two given points in 3d space
 static inline float vsqrdist(float3 a, float3 b) {
     float3 v = vsub(a, b);
     return dot(v, v);
