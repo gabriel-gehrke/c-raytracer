@@ -88,4 +88,22 @@ static inline float3 vreflect(float3 v, float3 n) {
     return normalized(vsub(v, vmul(n, 2 * dot(n, v))));
 }
 
+static inline float3 vmin(float3 a, float3 b) {
+    float3 v = {
+        .x = fminf(a.x, b.x),
+        .y = fminf(a.y, b.y),
+        .z = fminf(a.z, b.z)
+    };
+    return v;
+}
+
+static inline float3 vmax(float3 a, float3 b) {
+    float3 v = {
+        .x = fmaxf(a.x, b.x),
+        .y = fmaxf(a.y, b.y),
+        .z = fmaxf(a.z, b.z)
+    };
+    return v;
+}
+
 #endif

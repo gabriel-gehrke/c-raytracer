@@ -36,7 +36,7 @@ color raycaster_cast_ray(const ray* ray, const primitive* scene, const size_t sc
     // create reflected ray
     struct _ray ray_reflected = 
     {
-        .origin = vmac(closest.point, ray->direction, -1e-4f), // WHY MINUS?? probably something wrong with sphere intersection
+        .origin = vmac(closest.point, ray->direction, -EPSILON), // minus because we need to retract from the hit point
         .direction = vreflect(ray->direction, normal)
     };
     color c_reflect = raycaster_cast_ray(&ray_reflected, scene, scene_size, reflections - 1);
