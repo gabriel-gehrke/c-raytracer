@@ -8,3 +8,7 @@ const float3 VEC_FORW = {.x = 0, .y = 0, .z = 1};
 const float3 VEC_BACK = {.x = 0, .y = 0, .z = -1};
 const float3 VEC_LEFT = {.x = -1, .y = 0, .z = 0};
 const float3 VEC_RIGHT = {.x = 1, .y = 0, .z = 0};
+
+int vprint(float3 v, FILE* stream) {
+    return fprintf(stream, "(%f, %f, %f)\n", (double)v.x, (double)v.y, (double)v.z);
+}

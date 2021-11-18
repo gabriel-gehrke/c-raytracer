@@ -2,6 +2,7 @@
 #define FLOAT3_H
 
 #include <math.h>
+#include <stdio.h>
 
 typedef struct _float3 {
     float x, y, z;
@@ -105,5 +106,8 @@ static inline float3 vmax(float3 a, float3 b) {
     };
     return v;
 }
+
+// prints the string representation of the vector to the given stream
+int vprint(float3 v, FILE* stream);
 
 #endif

@@ -5,19 +5,20 @@
 #include "primitive.h"
 #include "sphere.h"
 #include "camera.h"
+#include "objloader.h"
 
 #define WIDTH 3840
 #define HEIGHT 2160
 #define TOTAL_PIXELS (WIDTH * HEIGHT)
 color pixels[TOTAL_PIXELS];
 
-// random float between -1 and 1
-static float randf() {
-    return 2.0f * (((float)rand())/((float)(RAND_MAX)) - 0.5f);
-}
-
 
 int main() {
+
+    mesh icosphere;
+    return objloader_load_mesh_from_path(&icosphere, "./icosphere.obj");
+
+    /*
     // camera setup
     camera cam = {
         .position = VEC_ZERO,
@@ -56,11 +57,13 @@ int main() {
 
     camera_render(&cam, pixels, WIDTH, HEIGHT, scene, scene_size);
 
-    FILE *fp = fopen("./first.ppm", "wb"); /* b - binary mode */
+    FILE *fp = fopen("./first.ppm", "wb");
     fprintf(fp, "P6\n%d %d\n255\n", WIDTH, HEIGHT);
     fwrite(pixels, TOTAL_PIXELS, sizeof(color), fp);
     fflush(fp);
     fclose(fp);
+    */
+    
 
     return EXIT_SUCCESS;
 }
