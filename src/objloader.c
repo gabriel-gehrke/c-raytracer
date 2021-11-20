@@ -41,11 +41,11 @@ bool objloader_load_mesh(mesh* out, int file, size_t file_size) {
         line[line_len] = 0;
         strncpy(line, head, line_len);
 
-        printf("at line %lu: %s\n", line_num, line);
+        printf("at line %zu: %s\n", line_num, line);
 
         if (strncmp(line, "v ", 2) == 0) {
             // a vertex definition: parse vertex
-            printf("Found a vertex definition in line %lu: \"%s\"\n", line_num, line);
+            printf("Found a vertex definition in line %zu: \"%s\"\n", line_num, line);
             float3 vert;
             if (!parse_vertex(&vert, line + 2)) return false;
             vprint(vert, stdout);

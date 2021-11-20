@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -O3 -W -Wall -Wextra -std=c99
+CFLAGS := -O3 -W -Wall -Wextra -std=c11
 
 .PHONY: all
 all: main
