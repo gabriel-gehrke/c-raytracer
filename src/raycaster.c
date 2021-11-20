@@ -21,7 +21,7 @@ color raycaster_cast_ray(const ray* ray, const primitive* scene, const size_t sc
     }
 
     // handle rays without any intersection
-    primitive* obj = closest.object;
+    const primitive* obj = closest.object;
     if (obj == NULL) return SKY_COLOR;
 
     // very basic shading based on surface normal

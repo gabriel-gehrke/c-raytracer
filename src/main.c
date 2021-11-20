@@ -1,11 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "color.h"
 #include "float3.h"
 #include "primitive.h"
 #include "sphere.h"
 #include "camera.h"
-#include "objloader.h"
+#include "util.h"
 
 #define WIDTH 3840
 #define HEIGHT 2160
@@ -15,10 +16,10 @@ color pixels[TOTAL_PIXELS];
 
 int main() {
 
-    mesh icosphere;
-    return objloader_load_mesh_from_path(&icosphere, "./icosphere.obj");
+//    mesh icosphere;
+//    return objloader_load_mesh_from_path(&icosphere, "./icosphere.obj");
 
-    /*
+    
     // camera setup
     camera cam = {
         .position = VEC_ZERO,
@@ -62,7 +63,7 @@ int main() {
     fwrite(pixels, TOTAL_PIXELS, sizeof(color), fp);
     fflush(fp);
     fclose(fp);
-    */
+    
     
 
     return EXIT_SUCCESS;

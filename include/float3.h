@@ -8,14 +8,14 @@ typedef struct _float3 {
     float x, y, z;
 } float3;
 
-const float3 VEC_ZERO;
-const float3 VEC_ONE;
-const float3 VEC_UP;
-const float3 VEC_DOWN;
-const float3 VEC_FORW;
-const float3 VEC_BACK;
-const float3 VEC_LEFT;
-const float3 VEC_RIGHT;
+extern const float3 VEC_ZERO;
+extern const float3 VEC_ONE;
+extern const float3 VEC_UP;
+extern const float3 VEC_DOWN;
+extern const float3 VEC_FORW;
+extern const float3 VEC_BACK;
+extern const float3 VEC_LEFT;
+extern const float3 VEC_RIGHT;
 
 // calculates and returns the dot product of the given vectors
 static inline float dot(float3 a, float3 b) {

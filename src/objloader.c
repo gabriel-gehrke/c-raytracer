@@ -27,7 +27,7 @@ bool objloader_load_mesh(mesh* out, int file, size_t file_size) {
     // create a read-only memory mapping of the provided file
     char* head = mmap(NULL, file_size, PROT_READ, MAP_PRIVATE, file, 0);
 
-    mesh m;
+    mesh m = {0};
     size_t line_num = 1;
 
     // go through file, line by line
@@ -41,11 +41,11 @@ bool objloader_load_mesh(mesh* out, int file, size_t file_size) {
         line[line_len] = 0;
         strncpy(line, head, line_len);
 
-        printf("at line %d: %s\n", line_num, line);
+        printf("at line %lu: %s\n", line_num, line);
 
         if (strncmp(line, "v ", 2) == 0) {
             // a vertex definition: parse vertex
-            printf("Found a vertex definition in line %d: \"%s\"\n", line_num, line);
+            printf("Found a vertex definition in line %lu: \"%s\"\n", line_num, line);
             float3 vert;
             if (!parse_vertex(&vert, line + 2)) return false;
             vprint(vert, stdout);
@@ -63,6 +63,7 @@ bool objloader_load_mesh(mesh* out, int file, size_t file_size) {
         line_num++;
     }
 
+    *out = m;
     return true;
 }
 

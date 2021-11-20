@@ -10,8 +10,8 @@ struct _color {
 typedef struct _color color;
 
 
-const color COLOR_BLACK;
-const color COLOR_WHITE;
+extern const color COLOR_BLACK;
+extern const color COLOR_WHITE;
 
 // generates a random color
 static inline color color_rand() {
