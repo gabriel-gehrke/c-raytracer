@@ -1,21 +1,21 @@
 #include "mesh.h"
+#include "stdio.h"
 
-bool ray_mesh_intersection(const ray* r, void* mesh_data, ray_hit* hit_out) {
-    mesh* this = (mesh*) mesh_data;
+bool ray_mesh_intersection(const ray* r, const void* mesh_data, ray_hit* hit_out) {
+    const mesh* this = (mesh*) mesh_data;
     ray_hit closest = 
     {
         .object = NULL,
         .distance = INFINITY
     };
 
-
-    triangle* tris = this->tris;
+    const triangle* tris = this->tris;
     const size_t n = this->tris_len;
 
     // check intersection for every triangle in mesh
     for (size_t i = 0; i < n; i++) {
         ray_hit hit;
-        if (ray_mesh_intersection(r, &tris[i], &hit) && hit.distance < closest.distance) {
+        if (ray_triangle_intersection(r, tris + i, &hit) && hit.distance < closest.distance) {
             closest = hit;
         }
     }

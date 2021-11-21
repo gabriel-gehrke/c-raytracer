@@ -14,8 +14,13 @@ typedef unsigned int uint;
 // random float between -1 and 1
 float randf();
 
+// checks if two strings are equal
 bool strequ(const char* a, const char* b);
 
+// checks if two strings are equal, checking only for the first "len" characters
 bool strnequ(const char* a, const char* b, size_t len);
+
+// counts the number of occurences of a substring in a string (not overlapping)
+size_t strncountstr(const char* str, const char* substr, size_t limit);
 
 #endif

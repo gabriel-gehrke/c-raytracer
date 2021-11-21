@@ -2,8 +2,10 @@
 #include "stdio.h"
 #include <math.h>
 
-#define AMBIENT_LIGHT 0.2f
+#define AMBIENT_LIGHT 0.3f
 #define SKY_COLOR COLOR_WHITE
+
+const float3 lightDir = {-1, -1, 1};
 
 color raycaster_cast_ray(const ray* ray, const primitive* scene, const size_t scene_size, const uint reflections) {
     ray_hit closest = {
@@ -26,7 +28,6 @@ color raycaster_cast_ray(const ray* ray, const primitive* scene, const size_t sc
 
     // very basic shading based on surface normal
     const float3 normal = closest.normal;
-    const float3 lightDir = VEC_DOWN;
     float cosTheta = fmaxf(AMBIENT_LIGHT, fminf(1, -dot(normal, lightDir)));
     color c_surface = color_mul(obj->color, cosTheta);
 

@@ -10,8 +10,8 @@ primitive sphere_get_primitive(sphere* s) {
     return p;
 }
 
-bool ray_sphere_intersection(const ray* ray, void* data, ray_hit* hit_out) {
-    sphere* this = (sphere*) data;
+bool ray_sphere_intersection(const ray* ray, const void* data, ray_hit* hit_out) {
+    const sphere* this = (sphere*) data;
 
     float3 d = ray->direction;
     float3 o = vsub(ray->origin, this->center);

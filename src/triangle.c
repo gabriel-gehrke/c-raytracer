@@ -1,12 +1,12 @@
 #include "triangle.h"
 
-bool ray_triangle_intersection(const ray* r, void* triangle_data, ray_hit* hit_out) {
-    triangle* this = (triangle*) triangle_data;
+bool ray_triangle_intersection(const ray* r, const void* triangle_data, ray_hit* hit_out) {
+    const triangle* this = (triangle*) triangle_data;
     float3 n = this->normal;
 
     // backface culling: don't render the triangle if it is hit from behind (dot product is positive)
     float D = dot(r->direction, n);
-    if (D > -EPSILON) return false;
+    if (D < -EPSILON) return false;
 
     float3 v0 = this->v0;
     float3 v1 = this->v1;
@@ -18,13 +18,13 @@ bool ray_triangle_intersection(const ray* r, void* triangle_data, ray_hit* hit_o
 
     // check if point is inside triangle
     float3 a = cross(vsub(v1, v0), vsub(hit, v0));
-    if (dot(n, a) < 0) return false;
+    if (dot(n, a) < -1e-5) return false;
 
     float3 b = cross(vsub(v2, v1), vsub(hit, v1));
-    if (dot(n, b) < 0) return false;
+    if (dot(n, b) < -1e-5) return false;
 
     float3 c = cross(vsub(v0, v2), vsub(hit, v2));
-    if (dot(n, c) < 0) return false;
+    if (dot(n, c) < -1e-5) return false;
 
     /*
     Vector3d edges[] = {v1 - v0, v2 - v1, v0 - v2, hit - v0, hit - v1, hit - v2};

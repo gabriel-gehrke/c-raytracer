@@ -11,7 +11,7 @@ struct _sphere {
 };
 typedef struct _sphere sphere;
 
-bool ray_sphere_intersection(const ray* r, void* sphere_data, ray_hit* hit_out);
+bool ray_sphere_intersection(const ray* r, const void* sphere_data, ray_hit* hit_out);
 primitive sphere_get_primitive(sphere* s);
 
 #endif

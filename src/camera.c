@@ -15,7 +15,7 @@ static color raycast_scene(const camera* cam, float frustX, float frustY, const 
     ray.direction = normalized(ray.direction);
 
     // cast ray with 5 bounces
-    return raycaster_cast_ray(&ray, scene, scene_size, 5);
+    return raycaster_cast_ray(&ray, scene, scene_size, 2);
 }
 
 static void print_percent(float percent) {
